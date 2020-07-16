@@ -1,4 +1,34 @@
 public class MakeProjectDir {
+    public static void main(String[] args) {
+        String xmlFile = "src/com/wk/xml/projectDir.xml";
+        Document doc = useDomReadXml(xmlFile);
+        Element rootElement = doc.getDocumentElement();
+        NodeList nlst = rootElement.getChildNodes();
+        //遍历集合内容
+        for (int i = 0; i < ((NodeList) nlst).getLength(); i++) {
+            String title = doc.getElementsByTagName("title").item(i).getFirstChild().getNodeValue();
+            String creater = doc.getElementsByTagName("author").item(i).getFirstChild().getNodeValue();
+            String year = doc.getElementsByTagName("year").item(i).getFirstChild().getNodeValue();
+            String price = doc.getElementsByTagName("price").item(i).getFirstChild().getNodeValue();
+            System.err.println("标题"+ title);
+            System.err.println("作者"+creater);
+            System.err.println("年份"+ year);
+            System.err.println("价格"+ price);
+        }
+    }
 
+    public static Document useDomReadXml(String soucePath){
+        File file = new File(soucePath);
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(file);
+            return doc;
+        } catch (Exception e) {
+            System.err.println("读取该xml文件失败");
+            e.printStackTrace();
+        }
+        return null;
+    }
     
 }
