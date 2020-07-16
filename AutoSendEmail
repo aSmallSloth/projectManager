@@ -6,7 +6,6 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 public class AutoSendEmail {
-
     public static void main(String[] args) {
         String from = "kai.wang@cnxdmj.com";
         String to = "15735182570@163.com";
@@ -17,20 +16,13 @@ public class AutoSendEmail {
         properties.setProperty("mail.user", "kai.wang@cnxdmj.com");
         properties.setProperty("mail.password", "wk562312");
         Session session = Session.getDefaultInstance(properties);
-
         try {
             MimeMessage message = new MimeMessage(session);
-
             message.setFrom(new InternetAddress(from));
-
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
             message.setSubject("This is the Subject Line!");
-
             message.setText("This is actual message");
-
             Transport.send(message);
-
             System.out.println("send message successfully...");
         } catch (Exception e) {
             e.printStackTrace();
